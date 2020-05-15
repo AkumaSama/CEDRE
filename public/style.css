@@ -1,0 +1,129 @@
+#menu-bg {
+	background-color: #85B2CE;
+}
+
+.menu-button {
+	color: black;
+	text-decoration: none;
+	background: transparent;
+	border: none;
+	font-size: 20px;
+	margin-left: -15px;
+	padding: 10px 15px 10px 15px;
+	transition: background-color 0.5s;
+}
+
+.menu-button:hover {
+	background-color: #789EB6;
+	color: black;
+	text-decoration: none;
+}
+
+.container form {
+	margin: 20px;
+}
+
+.btn-primary {
+	color: black;
+	background-color: #85B2CE;
+	border-color: #85B2CE;
+	transition: background-color 0.5s, border-color 0.5s;
+}
+
+.btn-primary:hover {
+	color: black;
+	background-color: #789EB6;
+	border-color: #789EB6;
+}
+
+.logo-recherche img {
+	width: 25px;
+	height: 25px;
+}
+
+.btn-ajout {
+	width: 200px;
+	height: 32px;
+}
+
+.obligatoire {
+	color: red !important;
+}
+
+.dropdown-menu {
+	background-color: #85B2CE;
+}
+
+#menu1 {
+	width: 230px;
+}
+
+#menu2 {
+	width: 280px;
+}
+
+.dropdown-menu a {
+	color: black;
+	font-size: 20px;
+	padding: 0px 0px 10px 10px;
+}
+
+.dropdown-menu a:hover {
+	text-decoration: none;
+}
+
+section	{
+	padding: 15px 0px 0px 0px;
+}
+
+#logo-academie {
+	background-color: #85B2CE;
+	width: 70%;
+}
+
+#bg-grey {
+	padding: 10px 0px 10px 30px;
+	background-color: #E8E7E7;
+}
+
+.grey {
+	color: gray !important;
+}
+
+.bg-blue {
+	background-color: #85B2CE;
+}
+
+.bg-blue p {
+	margin: 0px 0px 0px 10px;
+}
+
+.title {
+	padding: 5px 0px 5px 10px;
+}
+
+.border-blue {
+	border-width: 5px !important;
+	border-color: #85B2CE !important;
+	background-color: #E8E7E7;
+}
+
+#titre {
+	font-size: 25px !important;
+}
+
+.border-blue .btn {
+	margin: 20px 0px 0px 10px
+}
+
+#p-titre {
+	margin-left: 30px;
+}
+
+.btn-light:hover {
+	background-color: #85B2CE;
+}
+
+progress {
+	width : 45%;
+}

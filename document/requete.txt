@@ -1,0 +1,125 @@
+____________________________________________________________________________________________________________________________________
+
+PAGE REQUETE:
+	requete par permission :
+
+		SELECT req_id, req_commande, req_description, app_sigle, serv_nomDNS, base_libelle 
+		FROM structure 
+		inner join droit on structure.stru_id = droit.stru_id 
+		inner join base on application.app_id = base.base_id 
+		inner join application on base.app_id = application.app_id 	
+		inner join serveur_BDD on application.serv_id = serveur_BDD.serv_id 
+		inner join requete on application.app_id = requete.app_id 
+		where (droit.tperm_execution is true AND droit.tperm_modification IS false) OR (droit.tperm_execution is true AND droit.tperm_modification IS true)
+
+
+	recherche de requete par permission :
+
+		SELECT req_id, req_commande, req_description, app_sigle, serv_nomDNS, app_userBDD 
+		FROM structure 
+		inner join droit on structure.stru_id = droit.stru_id 
+		inner join application on droit.app_id = application.app_id 
+		inner join serveur_BDD on application.serv_id = serveur_BDD.serv_id
+		inner join requete on application.app_id = requete.app_id 
+		where ((droit.tperm_execution is true AND droit.tperm_modification IS false) OR (droit.tperm_execution is true AND droit.tperm_modification IS true)) AND (application.app_sigle = $recherche OR requete.req_description LIKE '%$recherche%')
+
+____________________________________________________________________________________________________________________________________
+
+PAGE AJOUT REQUETE:
+	ajout requete:
+
+		INSERT INTO requete ('req_description', 'req_commande', 'req_param1', 'req_param2', 'req_param3', 'req_param4', 'req_param5') 
+		VALUES ($reqDesc, $reqCmd, $reqParam1, $reqParam2, $reqParam3, $reqParam4, $reqParam5)
+
+____________________________________________________________________________________________________________________________________
+
+PAGE STATISTIQUE ADMIN:
+	statistique nombre de requête :
+
+		SELECT count(req_id) as countReq 
+		FROM requete
+
+	statistique nombre d'application :
+
+		SELECT count(app_id) as countApp 
+		FROM application
+
+	statistique nombre de serveur :
+
+		SELECT count(serv_id) as countServ 
+		FROM serveur_BDD
+
+	statistique nombre de type de base de donnée différente :
+
+		SELECT count(TBDD_id) as countType 
+		FROM type_bdd
+
+	statistique les 10 requêtes les plus exécuté :
+		
+		SELECT req_commande, req_description, req_nombreExec 
+		FROM requete 
+		LIMIT 10 
+		ORDER BY req_nombreExec ASC
+
+	statistique les 10 requêtes datant le plus :
+		
+		SELECT req_commande, req_description, req_dateDerniereExec 
+		FROM requete 
+		LIMIT 10 
+		ORDER BY req_dateDerniereExec DESC
+
+____________________________________________________________________________________________________________________________________
+
+PAGES LISTE ADMIN:
+	liste application:
+
+		SELECT app_id, app_description, app_sigle, app_userBDD, tbdd_libelle 
+		FROM type_bdd 
+		INNER JOIN application ON application.app_id = type_bdd.TBDD_id
+
+	liste serveur:
+
+		SELECT serv_id, serv_port, serv_nomDNS 
+		FROM serveur_bdd
+
+	liste admin:
+
+		SELECT user_id, user_login 
+		FROM utilisateur 
+		WHERE user_estAdmin IS true
+
+____________________________________________________________________________________________________________________________________
+
+PAGES AJOUT ADMIN:
+	ajout application:
+		liste des serveur  (pour l'afficher dans la liste):
+
+			SELECT serv_id, serv_nomDNS 
+			FROM serveur_bdd
+
+		liste des type de base de donnée  (pour l'afficher dans la liste):
+
+			SELECT TBDD_id, TBDD_libelle 
+			FROM type_bdd
+
+		INSERT INTO application ('app_sigle', 'app_description', 'app_nomBDD', 'app_userBDD', 'serv_id', 'TBDD_id')
+		VALUES ($sigle, $description, $nomBDD, $userBDD, $idServBDD, $idTypeBDD)
+
+	ajout serveur:
+
+		INSERT INTO serveur_bdd ('serv_commentaire', 'serv_nomDNS', 'serv_port') 
+		VALUES ($servDescription, $servNomDNS, $servPort)
+
+	ajout admin:
+		liste des utilisateur qui ne sont pas admin (pour l'afficher dans la liste):
+
+			SELECT uti_id, uti_login 
+			FROM utilisateur 
+			WHERE uti_estAdmin = false
+
+		UPDATE utilisateur 
+		SET uti_estAdmin = true 
+		WHERE uti_login = $selectedUser
+
+____________________________________________________________________________________________________________________________________
+

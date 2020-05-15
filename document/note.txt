@@ -1,0 +1,17 @@
+requete avec postgres https://stph.scenari-community.org/bdd/lap5/co/php2c02.html
+serveur du rectorat stocket et relié au madrillet
+
+lxc = LinuxContainer   https://linuxcontainers.org
+version php, mysql, postgress ... différent par container
+
+java, kotlin, androïd
+
+doc php
+
+host : ramsese-db.in.ac-rouen.fr
+Type de base : db2
+Login : cramsese
+Mot de passe : ramsrouen8
+Base : RAMW
+Requête : select uairne,uaidnp,uaidnc,uaiadr,u	aicpl,uailoc from db2irams.v_uai where acadco='21' and natuco like '3%'
+port : 50004
